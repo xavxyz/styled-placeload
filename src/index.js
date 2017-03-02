@@ -13,10 +13,12 @@ export const shimmer = keyframes`
 export const withLoader = Component => {
   const LoadingContainer = styled.div`
     position: relative;
+    margin: 0;
+    padding: 0;
   `;
 
   const LoadingComponent = styled(Component)`
-    &:before {
+    &:after {
       animation: 1s linear infinite forwards ${shimmer};
       background: #f6f7f8;
       background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
@@ -28,12 +30,9 @@ export const withLoader = Component => {
       left: 0;
       width: 100%;
       height: 100%;
-      margin: 0;
       content: '';
     }
   `;
-
-  LoadingComponent.displayName = `withLoader(${Component.displayName || 'Component'})`;
 
   return props =>
     props.loading
