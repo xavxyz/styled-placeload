@@ -16,9 +16,10 @@ const Hello = styled.div`
   align-items: center;
   width: 200px;
   height: 200px;
-  border: 1px dashed cornflowerblue;
-  color: sienna;
+  border: 4px dashed steelblue;
+  color: cornflowerblue;
   font-size: 20px;
+  font-weight: bold;
   font-family: Open Sans, sans-serif;
 `;
 
