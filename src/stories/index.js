@@ -1,22 +1,34 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
+import styled from 'styled-components';
 import Placeload from '../index';
 
-const containerStyle = {
-  width: 200,
-  height: 200,
-  border: '1px dashed cornflowerblue',
-};
+const Wrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
-const Hello = () => <div style={containerStyle}>Hello Placeload</div>;
+const Hello = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  border: 1px dashed cornflowerblue;
+  color: sienna;
+  font-size: 20px;
+  font-family: Open Sans, sans-serif;
+`;
 
 storiesOf('Square Placeload', module)
   .addDecorator(story => (
-    <div
-      style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-    >
+    <Wrapper>
       {story()}
-    </div>
+    </Wrapper>
   ))
-  .add('with loading', () => <Placeload loading><Hello /></Placeload>)
-  .add('without loading', () => <Placeload><Hello /></Placeload>);
+  .add('with loading', () => (
+    <Placeload loading square={200}><Hello>Hello Placeload</Hello></Placeload>
+  ))
+  .add('without loading', () => <Placeload><Hello>Hello Placeload</Hello></Placeload>);

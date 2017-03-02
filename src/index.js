@@ -1,28 +1,32 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import styled, { keyframes } from 'styled-components';
 
-const placeloadStyles = {
-  background: 'linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%)',
-  backgroundSize: '1000px 104px',
-  width: '100%',
-  height: '338px',
-  position: 'relative',
-  overflow: 'hidden',
-};
+const shimmer = keyframes`
+  from {
+      background-position: -468px 0
+  }
+  to {
+      background-position: 468px 0
+  }
+`;
 
-const Placeload = ({ children, loading = false, loadingStyle = {} }) => {
-  const style = loading ? { ...placeloadStyles, ...loadingStyle } : {};
-  console.log(children);
+const Loader = styled.div`
+  animation: 1s linear infinite forwards ${shimmer};
+  background: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 1000px 104px;
+  width: ${props => !!props.square ? `${props.square}px` : '100%'};
+  height: ${props => !!props.square ? `${props.square}px` : '300px'};
+  position: relative;
+  overflow: hidden;
+`;
 
-  return (
-    <div style={style}>
-      {!loading && children}
-    </div>
-  );
-};
+const Placeload = ({ children, loading = false, square = 0 }) =>
+  loading ? <Loader square={square} /> : children;
 
 Placeload.propTypes = {
-  loading: React.PropTypes.bool,
-  loadingStyle: React.PropTypes.object,
+  square: PropTypes.number,
+  loading: PropTypes.bool,
 };
 
 export default Placeload;
