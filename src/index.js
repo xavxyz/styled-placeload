@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes, Children, cloneElement } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const shimmer = keyframes`
+export const shimmer = keyframes`
   from {
       background-position: -468px 0
   }
@@ -10,23 +10,33 @@ const shimmer = keyframes`
   }
 `;
 
-const Loader = styled.div`
-  animation: 1s linear infinite forwards ${shimmer};
-  background: #f6f7f8;
-  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
-  background-size: 1000px 104px;
-  width: ${props => !!props.square ? `${props.square}px` : '100%'};
-  height: ${props => !!props.square ? `${props.square}px` : '300px'};
-  position: relative;
-  overflow: hidden;
-`;
+export const withLoader = Component => {
+  const LoadingContainer = styled.div`
+    position: relative;
+  `;
 
-const Placeload = ({ children, loading = false, square = 0 }) =>
-  loading ? <Loader square={square} /> : children;
+  const LoadingComponent = styled(Component)`
+    &:before {
+      animation: 1s linear infinite forwards ${shimmer};
+      background: #f6f7f8;
+      background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+      background-size: 1000px 104px;
+      position: relative;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      content: '';
+    }
+  `;
 
-Placeload.propTypes = {
-  square: PropTypes.number,
-  loading: PropTypes.bool,
+  LoadingComponent.displayName = `withLoader(${Component.displayName || 'Component'})`;
+
+  return props =>
+    props.loading
+      ? <LoadingContainer><LoadingComponent {...props} /></LoadingContainer>
+      : <Component {...props} />;
 };
-
-export default Placeload;

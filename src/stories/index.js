@@ -1,14 +1,7 @@
-import React from 'react';
 import { storiesOf } from '@kadira/storybook';
+import React from 'react';
 import styled from 'styled-components';
-import Placeload from '../index';
-
-const Wrapper = styled.div`
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import { withLoader } from '../index';
 
 const Hello = styled.div`
   display: flex;
@@ -23,13 +16,25 @@ const Hello = styled.div`
   font-family: Open Sans, sans-serif;
 `;
 
+const LoremParagraph = styled.p`
+  color: blue;
+`;
+
+const EnhancedHello = withLoader(Hello);
+const EnhancedParagraph = withLoader(LoremParagraph);
+
 storiesOf('Square Placeload', module)
-  .addDecorator(story => (
-    <Wrapper>
-      {story()}
-    </Wrapper>
-  ))
+  .add('loading ', () => <EnhancedHello loading>Hello Placeload</EnhancedHello>)
+  .add('not loading', () => <EnhancedHello>Hello Placeload</EnhancedHello>);
+
+storiesOf('Paragraph Placeload', module)
   .add('with loading', () => (
-    <Placeload loading square={200}><Hello>Hello Placeload</Hello></Placeload>
+    <EnhancedParagraph loading>
+      Cupcake ipsum dolor sit amet macaroon cookie. Topping pastry carrot cake tart jujubes cheesecake jelly-o. Danish icing cheesecake cake chocolate bar bear claw cake cookie sweet. Jujubes cake sweet lemon drops jujubes bear claw. Gummi bears pastry jelly beans dessert ice cream chocolate bar. Pudding chocolate cake tootsie roll sugar plum cake chocolate cake bonbon.
+    </EnhancedParagraph>
   ))
-  .add('without loading', () => <Placeload><Hello>Hello Placeload</Hello></Placeload>);
+  .add('without loading', () => (
+    <EnhancedParagraph>
+      Cupcake ipsum dolor sit amet macaroon cookie. Topping pastry carrot cake tart jujubes cheesecake jelly-o. Danish icing cheesecake cake chocolate bar bear claw cake cookie sweet. Jujubes cake sweet lemon drops jujubes bear claw. Gummi bears pastry jelly beans dessert ice cream chocolate bar. Pudding chocolate cake tootsie roll sugar plum cake chocolate cake bonbon.
+    </EnhancedParagraph>
+  ));
