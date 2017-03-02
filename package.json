@@ -1,0 +1,44 @@
+{
+  "name": "react-placeload",
+  "version": "1.0.0",
+  "description": "Inspired by the awesome [Placeload.js](https://github.com/victorvoid/placeload.js) :octocat:",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --quiet src",
+    "prettier": "prettier --write \"src/**/*.js\" --single-quote=true --trailing-comma=es5 --print-width=100",
+    "test": "npm run lint",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xavcz/react-placeload.git"
+  },
+  "author": "Xavier Cazalot (@xavcz) - http://xav.cz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xavcz/react-placeload/issues"
+  },
+  "homepage": "https://github.com/xavcz/react-placeload#readme",
+  "peerDependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "@kadira/storybook": "^2.21.0",
+    "babel-eslint": "^7.1.1",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "eslint": "^3.16.1",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-prettier": "^2.0.1",
+    "eslint-plugin-react": "^6.10.0",
+    "prettier": "^0.20.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  }
+}
